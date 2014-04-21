@@ -40,9 +40,9 @@ func runListZones(cmd *Command, args []string) {
 	for i := 0; i < len(domains); i++ {
 		msg := <- zoneInfoChannel
 		if msg.CheckOk == true {
-			fmt.Printf("%s: %s\n", msg.Zone, "ok")
+			fmt.Printf("%s\t%s\n", msg.Zone, "ok")
 		} else {
-			fmt.Printf("%s: %s\n", msg.Zone, msg.Message)
+			fmt.Printf("%s\t%s\n", msg.Zone, "not ok")
 		}
 	}
 }

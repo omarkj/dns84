@@ -22,15 +22,12 @@ type Record struct {
 	TTL string
 	Host string
 	Data string
-	Target string
 }
 
 var cmdListRecords = &Command {
 	Run: runListRecords,
 	Name: "records",
 }
-
-var zone string
 
 func init() {
 	cmdListRecords.Flag.StringVarP(&zone, "zone", "z", "", "zone")
@@ -39,7 +36,6 @@ func init() {
 func runListRecords(cmd *Command, args []string) {
 	apiEndpoint := fmt.Sprintf("%s/domains/ajax/6/?zone=%s", apiURL, zone)
 	resp, _ := client.Get(apiEndpoint)
-	
 	defer resp.Body.Close()
 	body, _ := ioutil.ReadAll(resp.Body)
 	var f RecordJson

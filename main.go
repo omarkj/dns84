@@ -17,6 +17,7 @@ var (
 	client = &http.Client{
 		Jar: cookieJar,
 	}
+	zone string
 )
 
 type Command struct {
@@ -29,6 +30,8 @@ var commands = []*Command{
 	cmdLogin,
 	cmdListZones,
 	cmdListRecords,
+	cmdDeleteRecord,
+	cmdAddRecord,
 }
 
 func main() {
@@ -44,7 +47,6 @@ func main() {
 		if cmd.Name == args[0] {
 			if err := cmd.Flag.Parse(args[1:]); err != nil {
 				log.Fatalf(err.Error())
-				os.Exit(2)
 			}
 			cmd.Run(cmd, cmd.Flag.Args())
 		}
